@@ -5,6 +5,7 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.2.*",
+		"way/generators": "2.*",
 		"robin-malfait/formgenerator": "dev-master",
 		"doctrine/dbal": "~2.3"
 	},
