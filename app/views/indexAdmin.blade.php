@@ -1,4 +1,4 @@
-@extends('plantilla')
+@extends('layout')
 
 @section('content')
     <h2>Wena Jo<h2>
