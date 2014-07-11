@@ -1,0 +1,1 @@
+C:\Users\Fernando\Documents\xampp\htdocs\c39\app/views/c39puertos/show.blade.php
