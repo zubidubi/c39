@@ -39,11 +39,15 @@ Route::get('users', function()
 });
 
 
-
+Route::get('c39manifiestos/ingresarArribo/{manifiesto}', 'C39manifiestosController@ingresarArribo');
+Route::post('c39manifiestos/update', 'C39manifiestosController@update');
+Route::get('c39manifiestos/arribo', 'C39manifiestosController@arribo');
 Route::get('Admin', 'AdminController@index');
 Route::get('Admin/crearEncabezadoManifiesto', 'AdminController@crearEncabezadoManifiesto');
 Route::post('Admin/crearEncabezadoManifiesto', 'AdminController@crearEM');
 Route::post('c39usuarios/create', 'C39usuariosController@store');
 Route::resource('c39usuarios','C39usuariosController');
 Route::resource('c39puertos','C39puertosController');
+Route::resource('c39sitios','C39sitiosController');
 Route::resource('c39rols','C39rolsController');
+Route::resource('c39manifiestos','C39manifiestosController');

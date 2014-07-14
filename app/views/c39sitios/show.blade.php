@@ -1,0 +1,1 @@
+C:\xampp\htdocs\c39\app/views/c39sitios/show.blade.php
