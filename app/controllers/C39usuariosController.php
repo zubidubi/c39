@@ -1,6 +1,6 @@
 <?php
 
-class C39usuariosController extends \BaseController {
+class C39usuariosController extends  BaseController {
 
 	/**
 	 * Display a listing of c39usuarios

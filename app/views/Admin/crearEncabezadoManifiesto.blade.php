@@ -1,4 +1,15 @@
+@extends('layout')
+@section('title') Crear encabezado de manifiesto @stop
 
+@section('content')
+{{Form::open(array('action' => 'AdminController@store', 'class' => 'form-horizontal'))}}
+
+        <div class="form-group">
+            {{Form::label('rutlb','Rut usuario', array('class' => 'col-sm-2 control-label'))}}
+            <div class="col-sm-4">
+            {{Form::text('rut', Input::old('rut'), array('class' => 'form-control', 'placeholder' => 'Rut'))}}
+            </div>
+        </div>
 {{Form::open();}}
     {{Form::label('tipo_man','Tipo manifiesto');}}
     {{Form::select('tipo_man', array('1' => 'Ingreso', '0' => 'Salida'), '1');}}

@@ -1,6 +1,6 @@
 <?php
 
-class C39puertosController extends \BaseController {
+class C39puertosController extends BaseController {
 
 	/**
 	 * Display a listing of c39puertos
@@ -14,6 +14,25 @@ class C39puertosController extends \BaseController {
 		return View::make('c39puertos.index', compact('c39puertos'));
 	}
 
+	//lista de ciudades
+	private function listaCiudades()
+	{
+		//Ciudad::all() obtiene todos los elementos de la tabla ciudad
+		$ciudades = C39ciudad::all();
+
+		foreach ($ciudades as $ciudad)
+		{
+    		$c = $ciudad->toArray();
+    		$id = $c['cod_ciudad'];
+    		$value = $c['nom_ciudad'];
+    		$listaCiudades[] = array($id => $value);
+		}
+
+		return $listaCiudades;
+	}
+
+
+
 	/**
 	 * Show the form for creating a new c39puerto
 	 *
@@ -21,7 +40,8 @@ class C39puertosController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('c39puertos.create');
+		$lc = $this -> listaCiudades();
+		return View::make('c39puertos.create') -> with('listaCiudades', $lc);
 	}
 
 	/**
@@ -29,6 +49,7 @@ class C39puertosController extends \BaseController {
 	 *
 	 * @return Response
 	 */
+
 	public function store()
 	{
 		$validator = Validator::make($data = Input::all(), C39puerto::$rules);
