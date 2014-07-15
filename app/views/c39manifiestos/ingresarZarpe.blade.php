@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title') Ingresar Arribo @stop
+@section('title') Ingresar Zarpe @stop
 
 @section('content')
        
@@ -45,52 +45,59 @@
         </div>
         
         <div class="form-group">
-            {{Form::label('fecha_est','Fecha estimada de arribo', array('class' => 'col-sm-2 control-label'))}}          
+            {{Form::label('fecha_est','Fecha estimada de arribo', array('class' => 'col-sm-2 control-label'))}}      
             <div class="col-sm-4">
             {{Form::text('fecha_est', $c39manifiesto->fecha_est, array('class' => 'form-control', 'disabled'))}}
             </div>
         </div>
 
          <div class="form-group">
-          	{{Form::label('fecha_est','Fecha de arribo', array('class' => 'col-sm-2 control-label'))}}    	
-            <div class="col-sm-4">
-    	  	{{Form::input('date','fecha_arb', Input::old('date'), array('class' => 'form-control'))}}
+          	{{Form::label('fecha_arb','Fecha de arribo', array('class' => 'col-sm-2 control-label'))}} 
+          	<div class="col-sm-4">
+            {{Form::text('fecha_arb', $c39manifiesto->fecha_arb, array('class' => 'form-control', 'disabled'))}}
 			</div>
         </div>
         <div class="form-group">
             {{Form::label('cod_sitio','Sitio Atraque', array('class' => 'col-sm-2 control-label'))}}
             <div class="col-sm-4">
-            {{Form::select('cod_sitio', $listaSitios, '1')}}
+            {{Form::select('cod_sitio', $listaSitios, $c39manifiesto->cod_sitio, array('disabled'))}}
             </div>
         </div>
         <div class="form-group">
             {{Form::label('armador','Armador', array('class' => 'col-sm-2 control-label'))}}
             <div class="col-sm-4">
-            {{Form::text('armador', Input::old('armador'), array('class' => 'form-control', 'placeholder' => 'Armador'))}}
+            {{Form::text('armador', $c39manifiesto->armador, array('class' => 'form-control', 'placeholder' => 'Armador', 'disabled'))}}
             </div>
         </div>
         <div class="form-group">
             {{Form::label('puerto_org','Puerto Origen', array('class' => 'col-sm-2 control-label'))}}
             <div class="col-sm-4">
-            {{Form::select('puerto_org', $listaPuertos, '1')}}
+            {{Form::select('puerto_org', $listaPuertos, $c39manifiesto->puerto_org, array('disabled'))}}
             </div>
         </div>
         <div class="form-group">
             {{Form::label('ult_puerto','Último Puerto', array('class' => 'col-sm-2 control-label'))}}
             <div class="col-sm-4">
-            {{Form::select('ult_puerto', $listaPuertos, '1')}}
+            {{Form::select('ult_puerto', $listaPuertos, $c39manifiesto->ult_puerto, array('disabled'))}}
             </div>
         </div>
         <div class="form-group">
             {{Form::label('prox_puerto','Próximo Puerto', array('class' => 'col-sm-2 control-label'))}}
             <div class="col-sm-4">
-            {{Form::select('prox_puerto', $listaPuertos, '1')}}
+            {{Form::select('prox_puerto', $listaPuertos, $c39manifiesto->prox_puerto, array('disabled'))}}
             </div>
         </div>
         <div class="form-group">
             {{Form::label('observacion','Observación', array('class' => 'col-sm-2 control-label'))}}
             <div class="col-sm-4">
-            {{Form::text('observacion', Input::old('observacion'), array('class' => 'form-control', 'placeholder' => 'Observación'))}}
+            {{Form::text('observacion', $c39manifiesto->observacion, array('class' => 'form-control', 'placeholder' => 'Observacion', 'disabled'))}}
+            </div>
+        </div>
+
+         <div class="form-group">
+            {{Form::label('fecha_zarp','Fecha de zarpe', array('class' => 'col-sm-2 control-label'))}}      
+            <div class="col-sm-4">
+            {{Form::input('date','fecha_zarp', Input::old('date'), array('class' => 'form-control'))}}
             </div>
         </div>
 
