@@ -139,7 +139,7 @@ class C39manifiestosController extends \BaseController {
 
 		$c39manifiesto->update($data);
 
-		return Redirect::route('c39manifiestos.arribo');
+		return Redirect::to('c39manifiestos/arribo');
 	}
 
 	/**
