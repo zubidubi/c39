@@ -40,12 +40,21 @@ Route::get('users', function()
 
 
 Route::get('c39manifiestos/ingresarArribo/{manifiesto}', 'C39manifiestosController@ingresarArribo');
+Route::get('c39manifiestos/ingresarZarpe/{manifiesto}', 'C39manifiestosController@ingresarZarpe');
+Route::get('c39manifiestos/editarUsuario/{usuario}', 'C39usuariosController@editarUsuario');
+
 Route::post('c39manifiestos/update', 'C39manifiestosController@update');
+Route::post('c39usuarios/update', 'C39usuariosController@update');
+
 Route::get('c39manifiestos/arribo', 'C39manifiestosController@arribo');
+Route::get('c39manifiestos/zarpe', 'C39manifiestosController@zarpe');
+
 Route::get('Admin', 'AdminController@index');
 Route::get('Admin/crearEncabezadoManifiesto', 'AdminController@crearEncabezadoManifiesto');
+
 Route::post('Admin/crearEncabezadoManifiesto', 'AdminController@crearEM');
 Route::post('c39usuarios/create', 'C39usuariosController@store');
+
 Route::resource('c39usuarios','C39usuariosController');
 Route::resource('c39puertos','C39puertosController');
 Route::resource('c39sitios','C39sitiosController');
