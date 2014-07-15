@@ -11,7 +11,7 @@
 					<tr>
 						<th>Nº Programación</th>
 						<th>Nº Viaje</th>
-						<th>Sitio</th>
+						<th>Puerto</th>
 						<th>Nombre Nave</th>
 						<th>Fecha Arribo Estimado</th>
 						<th>Fecha Recepción</th>
@@ -19,24 +19,17 @@
 					</tr>
 				</thead>
 				<tbody>
-					@if(sizeof($c39manifiestos) == 0)
-						<tr>No hay manifiestos</tr>
+					@if(sizeof($c39puertos) == 0)
+						<tr>No hay puertos</tr>
 					@endif	
-					@foreach ($c39manifiestos as $manifiesto)
+					@foreach ($c39puertos as $puerto)
 						<tr>
-							<td>{{$manifiesto->cod_man}}</td>
-							<td>{{$manifiesto->viaje}}</td>
-							<td>{{$manifiesto->cod_sitio}}</td>
-							<td>{{$manifiesto->fecha_est}}</td>
-							<td>{{$manifiesto->fecha_arb}}</td>
-							@if($manifiesto->up )
-							<td>{{$manifiesto->activo}}</td>
-
-
-							<td>{{C39ciudad::getCiudad($manifiesto->cod_ciudad)}}</td>
+							<td>{{$puerto->cod_puerto}}</td>
+							<td>{{$puerto->nom_puerto}}</td>
+							<td>{{C39ciudad::getCiudad($puerto->cod_ciudad)}}</td>
 							<td>
-								<button type="button" class="btn btn-warning btn-xs" id={{'e'.$manifiesto->cod_puerto.''}}>Editar</button>
-								<button type="button" class="btn btn-danger btn-xs" id={{'d'.$manifiesto->cod_puerto.''}}>Eliminar</button>
+								<button type="button" class="btn btn-warning btn-xs" id={{'e'.$puerto->cod_puerto.''}}>Editar</button>
+								<button type="button" class="btn btn-danger btn-xs" id={{'d'.$puerto->cod_puerto.''}}>Eliminar</button>
 							</td>
 						</tr>
 					@endforeach

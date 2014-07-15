@@ -28,7 +28,7 @@
 							<td>{{C39rol::getRol($usuario->id_rol)}}</td>
 							<td>{{C39puerto::getPuerto($usuario->cod_puerto)}}</td>
 							<td>
-								<a href={{''.URL::action('C39usuariosController@edit', [$usuario->rut]).''}} class="btn btn-info btn-xs" id={{'i'.$usuario->rut.''}}>Editar</a>
+								<button type="button" class="btn btn-warning btn-xs" id={{'e'.$usuario->rut.''}}>Editar</button>
 								<button type="button" class="btn btn-danger btn-xs" id={{'d'.$usuario->rut.''}}>Eliminar</button>
 							</td>
 						</tr>
@@ -39,4 +39,3 @@
 		<div class="panel-footer"></div>
 	</div>
 @stop
-

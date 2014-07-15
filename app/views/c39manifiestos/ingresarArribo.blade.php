@@ -46,14 +46,16 @@
         
         <div class="form-group">
             {{Form::label('fecha_est','Fecha estimada de arribo', array('class' => 'col-sm-2 control-label'))}}          
+
             <div class="col-sm-4">
             {{Form::text('fecha_est', $c39manifiesto->fecha_est, array('class' => 'form-control', 'disabled'))}}
             </div>
         </div>
 
          <div class="form-group">
-          	{{Form::label('fecha_est','Fecha de arribo', array('class' => 'col-sm-2 control-label'))}}    	
-            <div class="col-sm-4">
+          	{{Form::label('fecha_est','Fecha de arribo', array('class' => 'col-sm-2 control-label'))}}  	  	
+
+          	<div class="col-sm-4">
     	  	{{Form::input('date','fecha_arb', Input::old('date'), array('class' => 'form-control'))}}
 			</div>
         </div>

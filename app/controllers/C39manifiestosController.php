@@ -20,20 +20,6 @@ class C39manifiestosController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-
-	public function zarpe()
-	{
-		$c39manifiestos = C39manifiesto::whereNull('fecha_zarp')->get();
-		
-
-		return View::make('c39manifiestos.zarpe', compact('c39manifiestos'));
-	}
-
-	/**
-	 * Display a listing of c39manifiestos
-	 *
-	 * @return Response
-	 */
 	public function index()
 	{
 		$c39manifiestos = C39manifiesto::all();
@@ -57,18 +43,6 @@ class C39manifiestosController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function ingresarZarpe($manifiesto)
-	{
-		$c39manifiesto = C39manifiesto::find($manifiesto);
-		return View::make('c39manifiestos.ingresarZarpe', compact('c39manifiesto')) ->with('listaPaises', C39pais::getListaPaises()) ->with('listaPuertos', C39puerto::getListaPuertos())->with('listaSitios', C39sitio::getListaSitios());
-	}
-
-	/**
-	 * Show the form for creating a new c39manifiesto
-	 *
-	 * @return Response
-	 */
-
 	public function create()
 	{
 		return View::make('c39manifiestos.create') ->with('listaPaises', C39pais::getListaPaises()) ->with('listaSitios', C39sitio::getListaSitios());
@@ -92,7 +66,6 @@ class C39manifiestosController extends \BaseController {
 
 		return Redirect::route('c39manifiestos.index');
 	}
-
 
 	/**
 	 * Display the specified c39manifiesto.
