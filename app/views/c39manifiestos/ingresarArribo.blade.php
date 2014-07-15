@@ -69,7 +69,7 @@
             {{Form::text('armador', Input::old('armador'), array('class' => 'form-control', 'placeholder' => 'Armador'))}}
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group"> 
             {{Form::label('puerto_org','Puerto Origen', array('class' => 'col-sm-2 control-label'))}}
             <div class="col-sm-4">
             {{Form::select('puerto_org', $listaPuertos, '1')}}
