@@ -22,14 +22,14 @@
 					@if(sizeof($c39manifiestos) == 0)
 						<tr>No hay manifiestos</tr>
 					@endif	
-					@foreach ($c39manifiestos as $manifiesto)
+					@foreach($c39manifiestos as $manifiesto)
 						<tr>
 							<td>{{$manifiesto->cod_man}}</td>
 							<td>{{$manifiesto->viaje}}</td>
 							<td>{{$manifiesto->cod_sitio}}</td>
+							<td>{{$manifiesto->nom_nave}}</td>
 							<td>{{$manifiesto->fecha_est}}</td>
 							<td>{{$manifiesto->fecha_arb}}</td>
-							@if($manifiesto->up )
 							<td>{{$manifiesto->activo}}</td>
 
 

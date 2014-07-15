@@ -90,7 +90,7 @@ class C39manifiestosController extends \BaseController {
 
 		C39manifiesto::create($data);
 
-		return Redirect::route('c39manifiestos.index');
+		return Redirect::to('c39manifiestos/arribo');
 	}
 
 
