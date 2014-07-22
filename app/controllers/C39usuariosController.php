@@ -14,38 +14,6 @@ class C39usuariosController extends  BaseController {
 		return View::make('c39usuarios.index', compact('c39usuarios'));
 	}
 
-	//lista de puertos
-	private function listaPuertos()
-	{
-		//Pais::all() obtiene todos los elementos de la tabla pais
-		$puertos = C39puerto::all();
-
-		foreach ($puertos as $puerto)
-		{
-    		$p = $puerto->toArray();
-    		$id = $p['cod_puerto'];
-    		$value = $p['nom_puerto'];
-    		$listaPuertos[] = array($id => $value);
-		}
-
-		return $listaPuertos;
-	}
-
-	private function listaRoles()
-	{
-		//Pais::all() obtiene todos los elementos de la tabla pais
-		$roles = C39rol::all();
-
-		foreach ($roles as $rol)
-		{
-    		$r = $rol->toArray();
-    		$id = $r['id_rol'];
-    		$value = $r['rol'];
-    		$listaRoles[] = array($id => $value);
-		}
-
-		return $listaRoles;
-	}
 
 	/**
 	 * Show the form for creating a new c39usuario
@@ -54,8 +22,8 @@ class C39usuariosController extends  BaseController {
 	 */
 	public function create()
 	{
-		$lp = $this->listaPuertos();
-		$lr = $this->listaRoles();
+		$lp = C39puerto::getListaPuertos();
+		$lr = C39rol::getListaRoles();
 		return View::make('c39usuarios.create') -> with('listaPuertos', $lp, 'listaRoles', $lr) -> with('listaRoles', $lr);
 	}
 
@@ -138,5 +106,7 @@ class C39usuariosController extends  BaseController {
 
 		return Redirect::route('c39usuarios.index');
 	}
+
+	
 
 }

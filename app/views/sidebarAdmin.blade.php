@@ -6,13 +6,13 @@
                 <a href="#"><i class="fa fa-files-o fa-fw"></i> Tramitación<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="http://localhost/c39/public/c39manifiestos/create">Crear encabezado de manifiesto</a>
+                        <a href="{{URL::to('c39manifiestos/create')}}">Crear encabezado de manifiesto</a>
                     </li>
                     <li>
-                        <a href="http://localhost/c39/public/c39manifiestos/arribo">Registrar arribo efectivo</a>
+                        <a href="{{URL::to('c39manifiestos/arribo')}}">Registrar arribo efectivo</a>
                     </li>
                     <li>
-                        <a href="http://localhost/c39/public/c39manifiestos/zarpe">Registrar zarpe efectivo</a>
+                        <a href="{{URL::to('c39manifiestos/zarpe')}}">Registrar zarpe efectivo</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
@@ -23,10 +23,10 @@
                 <a href="#"><i class="glyphicon glyphicon-user"></i>  Usuarios<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="http://localhost/c39/public/c39usuarios/create">Crear usuarios</a>
+                        <a href="{{URL::to('c39usuarios/create')}}">Crear usuarios</a>
                     </li>
                     <li>
-                        <a href="http://localhost/c39/public/c39usuarios">Administración de usuarios</a>
+                        <a href="{{URL::to('c39usuarios')}}">Administración de usuarios</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->

@@ -42,6 +42,20 @@ class C39manifiestosController extends \BaseController {
 	}
 
 	/**
+	 * Display a listing of c39manifiestos
+	 *
+	 * @return Response
+	 */
+	public function indexNav()
+	{
+		$c39manifiestos = C39manifiesto::whereNull('fecha_zarp')->where('createdBy','=',Auth::user()->username)->get();
+
+
+		return View::make('c39manifiestos.index', compact('c39manifiestos'));
+	}
+
+
+	/**
 	 * Show the form for creating a new arribo
 	 *
 	 * @return Response

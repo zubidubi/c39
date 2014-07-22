@@ -14,6 +14,12 @@
             </div>
         </div>
         <div class="form-group">
+            {{Form::label('emaillb','Email', array('class' => 'col-sm-2 control-label'))}}
+             <div class="col-sm-4">
+            {{Form::email('email', $c39usuario->email, array('class' => 'form-control', 'placeholder' => 'Email'))}}
+            </div>
+        </div>
+        <div class="form-group">
             {{Form::label('username','Username', array('class' => 'col-sm-2 control-label'))}}
             <div class="col-sm-4">
             {{Form::text('username', $c39usuario->username, array('class' => 'form-control', 'placeholder' => 'Username'))}}
@@ -22,13 +28,13 @@
         <div class="form-group">
             {{Form::label('id_rol','Rol', array('class' => 'col-sm-2 control-label'))}}
             <div class="col-sm-4">
-            {{Form::select('id_rol', $listaRoles, $c39usuario->id_rol)}}
+            {{Form::select('id_rol', C39rol::getListaRoles(), $c39usuario->id_rol)}}
             </div>
         </div>
         <div class="form-group">
             {{Form::label('cod_puerto','Puerto', array('class' => 'col-sm-2 control-label'))}}
             <div class="col-sm-4">
-            {{Form::select('cod_puerto', $listaPuertos, $c39usuario->cod_puerto)}}
+            {{Form::select('cod_puerto', C39puerto::getListaPuertos(), $c39usuario->cod_puerto)}}
             </div>
         </div>
         

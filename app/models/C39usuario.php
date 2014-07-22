@@ -1,8 +1,11 @@
 <?php
 // se debe indicar en donde esta la interfaz a implementar
 use Illuminate\Auth\UserInterface;
-class C39usuario extends Eloquent implements UserInterface{
+use Illuminate\Auth\Reminders\RemindableInterface;
+use Illuminate\Auth\Reminders\RemindableTrait;
+class C39usuario extends Eloquent implements UserInterface, RemindableInterface{
 
+	use RemindableTrait;
 	// Add your validation rules here
 	public static $rules = [
 		// 'title' => 'required'
@@ -43,5 +46,15 @@ class C39usuario extends Eloquent implements UserInterface{
 	{
 	    return 'remember_token';
 	}
+
+	/**
+     * Get the e-mail address where password reminders are sent.
+     *
+     * @return string
+     */
+    public function getReminderEmail()
+    {
+        return $this->email;
+    }
 
 }

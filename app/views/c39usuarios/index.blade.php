@@ -11,6 +11,7 @@
 						<th>Rut</th>
 						<th>Nombre</th>
 						<th>Usuario</th>
+						<th>Email</th>
 						<th>Rol</th>
 						<th>Puerto</th>
 						<th>Control</th>
@@ -25,6 +26,7 @@
 							<td>{{$usuario->rut}}</td>
 							<td>{{$usuario->nombre}}</td>
 							<td>{{$usuario->username}}</td>
+							<td>{{$usuario->email}}</td>
 							<td>{{C39rol::getRol($usuario->id_rol)}}</td>
 							<td>{{C39puerto::getPuerto($usuario->cod_puerto)}}</td>
 							<td>

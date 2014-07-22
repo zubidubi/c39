@@ -13,7 +13,7 @@ class C39rol extends \Eloquent {
 	// Don't forget to fill this array
 	//protected $fillable = [];
 
-	private function getListaRoles()
+	public static function getListaRoles()
 	{
 		//Pais::all() obtiene todos los elementos de la tabla pais
 		$roles = C39rol::all();

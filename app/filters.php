@@ -91,11 +91,16 @@ Route::filter('csrf', function()
 
 
 //controlamos todos los roles de usuarios desde aquí
-Route::filter('roles', function($ruta,$peticion,$roles,$redirect)
-{
-  
-    $roles = explode("-", $roles);
-    if(!in_array(Auth::user()->id_rol, $roles))
-        return Redirect::to($redirect);
+Route::filter('isAdmin', function()
+{	
+    if(Auth::user()->id_rol != '1')
+        return Redirect::to('/');
+        
+});
+
+Route::filter('isNav', function()
+{	
+    if(Auth::user()->id_rol != '2')
+        return Redirect::to('/');
         
 });

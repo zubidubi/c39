@@ -23,7 +23,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Cambiar contraseña</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="http://localhost/c39/public/login"><i class="fa fa-sign-out fa-fw"></i> Cerrar sesión</a>
+                        <li><a href="{{URL::to('logout')}}"><i class="fa fa-sign-out fa-fw"></i> Cerrar sesión</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -31,7 +31,11 @@
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
-            @include('sidebar')
+            @if(Auth::user()->id_rol == '1')
+                @include('sidebarAdmin')
+            @else
+                @include('sidebarNav')
+            @endif
             
         </nav>
 
