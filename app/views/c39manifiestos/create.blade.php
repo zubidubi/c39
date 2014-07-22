@@ -52,7 +52,11 @@
           	{{Form::label('fecha_est','Fecha de arribo', array('class' => 'col-sm-2 control-label'))}}  	  	
 
           	<div class="col-sm-4">
-    	  	{{Form::input('date','fecha_est', Input::old('date'), array('class' => 'form-control'))}}
+                <div class='input-group date' id='datetimepicker1' data-date-format="YYYY/MM/DD hh:mm">
+                    {{Form::input('text','fecha_est', Input::old('date'), array('class' => 'form-control'))}}
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>    	  	
 			</div>
         </div>
         <div class="form-group">
@@ -61,6 +65,17 @@
             </div>
         </div>
     {{Form::close();}}
+
+    <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker({
+                    pick12HourFormat: 'false',
+                    language: 'es',
+                });
+                var date = new Date();
+                $('#datetimepicker1').data("DateTimePicker").setMinDate(new Date(date.getFullYear(), date.getMonth(), date.getDate()));
+            });
+        </script>
 
 @stop
 

@@ -9,7 +9,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">MM-Cabotaje Admin</a>
+                <a class="navbar-brand" href="index.html">Aduanas Admin</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -17,10 +17,10 @@
         
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-user fa-fw"></i> {{Auth::user()->username}} <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Cambiar contraseña</a>
+                        <li><a href="{{URL::to('passwordChange')}}"><i class="fa fa-gear fa-fw"></i> Cambiar contraseña</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="{{URL::to('logout')}}"><i class="fa fa-sign-out fa-fw"></i> Cerrar sesión</a>

@@ -6,8 +6,8 @@
 	"require": {
 		"laravel/framework": "4.2.*",
 		"way/generators": "2.*",
-		"robin-malfait/formgenerator": "dev-master",
 		"guzzlehttp/guzzle": "~4.0",
+		"thujohn/pdf": "dev-master",
 		"doctrine/dbal": "~2.3"
 	},
 	"autoload": {

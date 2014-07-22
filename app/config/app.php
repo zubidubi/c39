@@ -122,7 +122,7 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider',
-		'RobinMalfait\Formgenerator\FormgeneratorServiceProvider'
+		'Thujohn\Pdf\PdfServiceProvider'
 
 	),
 
@@ -190,7 +190,7 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-		'Formgenerator' => 'RobinMalfait\Formgenerator\Facades\Formgenerator',
+		'PDF'			  => 'Thujohn\Pdf\PdfFacade',
 
 	),
 
