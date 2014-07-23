@@ -29,4 +29,9 @@ class C39sitio extends \Eloquent {
 		return $listaSitios;
 	}
 
+	public function puerto()
+    {
+        return $this->belongsTo('C39puerto');
+    }
+
 }

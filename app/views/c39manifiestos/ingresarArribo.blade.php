@@ -50,23 +50,23 @@
             {{Form::text('fecha_est', $c39manifiesto->fecha_est, array('class' => 'form-control', 'disabled'))}}
             </div>
         </div>
-
-         <div class="form-group">
-          	{{Form::label('fecha_est','Fecha de arribo', array('class' => 'col-sm-2 control-label'))}}    	
-            <div class="col-sm-4">
-    	  	    <div class='input-group date' id='datetimepicker1' data-date-format="YYYY/MM/DD hh:mm">
-                    {{Form::input('text','fecha_arb', Input::old('date'), array('class' => 'form-control'))}}
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-			</div>
-        </div>
         <div class="form-group">
             {{Form::label('cod_sitio','Sitio Atraque', array('class' => 'col-sm-2 control-label'))}}
             <div class="col-sm-4">
             {{Form::select('cod_sitio', $listaSitios, '1')}}
             </div>
         </div>
+         <div class="form-group">
+          	{{Form::label('fecha_est','Fecha de arribo', array('class' => 'col-sm-2 control-label'))}}    	
+            <div class="col-sm-4">
+    	  	    <div class='input-group date' id='datetimepicker1' data-date-format="YYYY/MM/DD HH:mm">
+                    {{Form::input('text','fecha_real', Input::old('date'), array('class' => 'form-control'))}}
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+			</div>
+        </div>
+        
         <div class="form-group">
             {{Form::label('armador','Armador', array('class' => 'col-sm-2 control-label'))}}
             <div class="col-sm-4">
@@ -105,15 +105,6 @@
         </div>
     {{Form::close();}}
 
-    <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker1').datetimepicker({
-                    pick12HourFormat: 'false',
-                    language: 'es',
-                });
-                var date = new Date();
-                $('#datetimepicker1').data("DateTimePicker").setMinDate(new Date(date.getFullYear(), date.getMonth(), date.getDate()));
-            });
-        </script>
+    {{HTML::script('assets/js/dateTimePickerConfig.js')}}
 
 @stop

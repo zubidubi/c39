@@ -6,7 +6,10 @@
                 <a href="#"><i class="fa fa-files-o fa-fw"></i> Tramitación<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="{{URL::to('c39manifiestos/create')}}">Crear encabezado de manifiesto</a>
+                        <a href="{{URL::to('c39manifiestos/create')}}">Crear manifiesto ingreso</a>
+                    </li>
+                    <li>
+                        <a href="{{URL::to('c39manifiestos/salida')}}">Crear manifiesto salida</a>
                     </li>
                     <li>
                         <a href="{{URL::to('c39manifiestos/arribo')}}">Registrar arribo efectivo</a>
@@ -17,7 +20,9 @@
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
-            
+            <li>
+                <a href="{{URL::to('acta')}}"><i class="glyphicon glyphicon-file"></i> Actas</a>
+            </li>
                         
             <li>
                 <a href="#"><i class="glyphicon glyphicon-user"></i>  Usuarios<span class="fa arrow"></span></a>

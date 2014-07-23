@@ -9,7 +9,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Aduanas Admin</a>
+                @if(Auth::user()->id_rol == '1')
+                    <a class="navbar-brand" href="{{URL::to('indexAdmin')}}">Aduanas Admin</a>
+                @elseif(Auth::user()->id_rol == '2')    
+                    <a class="navbar-brand" href="{{URL::to('indexNav')}}">Aduanas Naviera</a>
+                @else
+                    <a class="navbar-brand" href="{{URL::to('index')}}">Aduanas</a>
+                @endif
             </div>
             <!-- /.navbar-header -->
 

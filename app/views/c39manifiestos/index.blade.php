@@ -14,10 +14,7 @@
 						<th>Sitio</th>
 						<th>Nombre Nave</th>
 						<th>Fecha Arribo Estimado</th>
-						<th>Estado</th>
-						@if(Auth::user()->id_rol == 1)
-							<th>Control</th>
-						@endif
+						<th>Control</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -30,14 +27,14 @@
 							<td>{{$manifiesto->viaje}}</td>
 							<td>{{$manifiesto->cod_sitio}}</td>
 							<td>{{$manifiesto->nom_nave}}</td>
-							<td>{{$manifiesto->fecha_est}}</td>
-							<td>{{$manifiesto->activo}}</td>
-							@if(Auth::user()->id_rol == 1)
-								<td>
+							<td>{{$manifiesto->fecha_est}}</td>						
+							<td>
+								<a href="{{URL::action('C39manifiestosController@manifiestoSalida', [$manifiesto->cod_man])}}" class="btn btn-info btn-xs" id="{{'s'.$manifiesto->cod_man}}">Generar Manifiesto Salida</a>
+								@if(Auth::user()->id_rol == 1)
 									<button type="button" class="btn btn-warning btn-xs" id={{'e'.$manifiesto->cod_puerto.''}}>Editar</button>
 									<button type="button" class="btn btn-danger btn-xs" id={{'d'.$manifiesto->cod_puerto.''}}>Eliminar</button>
-								</td>
-							@endif
+								@endif
+								</td>							
 						</tr>
 					@endforeach
 				</tbody>

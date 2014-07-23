@@ -1,17 +1,105 @@
 @extends('layout')
-@section('title') Acta de recepción de nave @stop
+@section('title') Actas manifiesto @stop
 
 @section('content')
        
-    {{Form::open()}}
-        <div class="form-group">
-            {{Form::label('cod_man', 'Número de manifiesto:', array('class' => 'col-sm-2 control-label'))}}
-            <div class="col-sm-4">
-            {{Form::label('cod_man', $c39manifiesto->cod_man)}}
-            </div>
-        </div>
-        
-        
-    {{Form::close();}}
+	<div class="panel panel-default">
+        <div class="panel-heading"> Encabezado manifiesto</div>
+        <div class="panel-body">
 
+        	{{Form::open(array('onsubmit' => 'return false', 'id' => 'filtro', 'class' => 'form-inline'))}}
+        		<div class="form-group">
+		            {{Form::label('puerto','Puerto', array('class' => 'col-sm-2 control-label'))}}
+		            <div class="col-sm-4">
+		            {{Form::select('puerto', C39puerto::getListaPuertos(), '1')}}
+		            </div>
+		        </div>
+		        <div class="form-group">
+		    		{{Form::label('tipo_man','Tipo manifiesto', array('class' => 'col-sm-2 control-label'))}}
+		    		<div class="col-sm-4">
+		    		{{Form::select('tipo_man', array('1' => 'Ingreso', '0' => 'Salida'), '1');}}
+		 			</div>
+		        </div>
+		        
+		        {{ Form::submit('Filtrar', array('class' => 'btn btn-info')) }}
+		    {{Form::close()}}
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nº Programación</th>
+                        <th>Puerto</th>
+                        <th>Nombre Nave</th>
+                        <th>Nº Viaje</th>
+                        <th>Sitio</th>                        
+                        <th>Fecha Arribo/Zarpe Estimado</th>
+                        <th>Fecha Arribo/Zarpe Real</th>
+                        <th>Tipo</th>
+                        <th>Control</th>
+                    </tr>
+                </thead>
+                <tbody id="resp">                   
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-footer"></div>
+    </div>   
+
+    <script type="text/javascript">
+       (function() {
+          $("#filtro").submit(function() {
+             $.ajax({
+                url: "{{URL::action('C39manifiestosController@actaPOST')}}",
+                type: 'POST',
+                data: {puerto: $("#puerto").val(), tipo_man: $("#tipo_man").val()},
+                dataType: 'JSON',
+                beforeSend: function() {
+                   $("#resp").html('Buscando actas...');
+                },
+                error: function() {
+                   $("#resp").html('<div> Ha surgido un error. </div>');
+                },
+                success: function(respuesta) {
+                   if (respuesta.length != 0) {
+                   		var html;
+                   		var route = "{{URL::action('C39manifiestosController@printer')}}"
+                   		route = route.substring(0 , route.length - 10);
+                   		for(i in respuesta)
+                   		{
+                   			html += '<tr>';
+		                    html += '<td>' + respuesta[i].cod_man + ' </td>';
+		                    html += '<td>' + respuesta[i].nom_puerto + ' </td>';
+		                    html += '<td>' + respuesta[i].nom_nave + ' </td>';
+		                    html += '<td>' + respuesta[i].viaje + ' </td>';
+		                    html += '<td>' + respuesta[i].cod_sitio + ' </td>';
+		                    html += '<td>' + respuesta[i].fecha_est + ' </td>';
+		                    html += '<td>' + respuesta[i].fecha_real + ' </td>';
+		                    html += '<td>' + respuesta[i].tipo_man + ' </td>';
+		                    html += '<td> <a href="'+route + respuesta[i].cod_man +'" class="btn btn-default" id="p' + respuesta[i].cod_man + '"><i class="glyphicon glyphicon-print"></i></a> </td>';
+		                    html += '</tr>';
+		                   /* html += '<td> <button type="button" class="btn btn-default" id="p' + respuesta[i].cod_man + '"><i class="glyphicon glyphicon-print"></i></button> </td>';
+		                    html += '</tr>';
+		                    $('#p'+ respuesta[i].cod_man).click(function()
+		                    	{
+		                    		$.ajax({
+		                    			url: "{{URL::action('C39manifiestosController@printer')}}",
+		                    			type: 'POST',
+		                    			data: {cod_man: respuesta[i].cod_man},
+		                    			dataType: 'JSON',
+		                    			success: function() {
+
+		                    			}
+		                    		});
+		                    	});*/
+                   		}
+                   		$("#resp").html(html);
+                      
+                   } else {
+                      $("#resp").html('<div> No hay actas. </div>');
+                   }
+                }
+             });
+          });
+       }).call(this);
+    </script>
 @stop

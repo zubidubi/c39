@@ -3,13 +3,76 @@
 class C39manifiestosController extends \BaseController {
 
 	/**
+	 * Display a listing of c39manifiestos
+	 *
+	 * @return Response
+	 */
+
+	public function acta()
+	{
+		$c39manifiestos = C39manifiesto::whereNotNull('fecha_real')
+						->orderBy('cod_man', 'desc')
+						->get();
+		
+
+		return View::make('c39manifiestos.acta', compact('c39manifiestos'));
+	}
+
+	public function actaPOST()
+	{
+		$c39manifiestos = C39manifiesto::whereNotNull('fecha_real')						
+						->where('tipo_man', '=', Input::get('tipo_man'))		
+						->leftjoin('c39sitio', 'c39manifiesto.cod_sitio', '=', 'c39sitio.cod_sitio')
+						->where('c39sitio.cod_puerto', '=', Input::get('puerto'))	
+						->orderBy('cod_man', 'desc')			
+						->get();
+		foreach ($c39manifiestos as $manifiesto) 
+		{
+			$manifiesto['nom_puerto'] = C39puerto::getPuerto($manifiesto['cod_puerto']);
+		}
+		return Response::json($c39manifiestos);
+	}
+
+	public function printer($id)
+	{
+		$c39manifiesto = C39manifiesto::find($id);
+		$html = '<!DOCTYPE html>
+				<html lang ="es">
+					<head>
+						<meta charset="UTF-8">
+					</head>
+					<body>
+						<table>
+							<thead>
+								<tr>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Nº Programación:</td>
+									<td>'.$c39manifiesto->cod_man.'</td>
+								</tr>
+							</tbody>
+						</table>
+					</body>
+				</html>';
+		Config::set('PDF::config.DOMPDF_ENABLE_CSS_FLOAT', true );
+		return PDF::load($html, 'A4', 'portrait')->show();
+	}
+
+	/**
 	 * Display a listing of c39manifiestos encabezado
 	 *
 	 * @return Response
 	 */
 	public function arribo()
 	{
-		$c39manifiestos = C39manifiesto::whereNull('fecha_arb')->get();
+		$c39manifiestos = C39manifiesto::whereNull('fecha_real')
+						->where('tipo_man', '=', '1')
+						->orderBy('cod_man', 'desc')
+						->get();
 		
 
 		return View::make('c39manifiestos.arribo', compact('c39manifiestos'));
@@ -23,10 +86,24 @@ class C39manifiestosController extends \BaseController {
 
 	public function zarpe()
 	{
-		$c39manifiestos = C39manifiesto::whereNull('fecha_zarp')->get();
+		$c39manifiestos = C39manifiesto::whereNull('fecha_real')
+						->where('tipo_man', '=', '0')
+						->orderBy('cod_man', 'desc')
+						->get();
 		
 
 		return View::make('c39manifiestos.zarpe', compact('c39manifiestos'));
+	}
+
+	public static function ingresoLleno($id)
+	{
+		$c39manifiesto = C39manifiesto::find($id);
+		if (isset($c39manifiesto->fecha_real) )
+		{
+			return true;
+		}
+		else
+			return false;
 	}
 
 	/**
@@ -36,7 +113,10 @@ class C39manifiestosController extends \BaseController {
 	 */
 	public function index()
 	{
-		$c39manifiestos = C39manifiesto::all();
+		$c39manifiestos = C39manifiesto::where('tipo_man', '=', '1')
+						->whereNull('ref')	
+						->orderBy('cod_man', 'desc')				
+						->get();
 
 		return View::make('c39manifiestos.index', compact('c39manifiestos'));
 	}
@@ -48,10 +128,25 @@ class C39manifiestosController extends \BaseController {
 	 */
 	public function indexNav()
 	{
-		$c39manifiestos = C39manifiesto::whereNull('fecha_zarp')->where('createdBy','=',Auth::user()->username)->get();
+		$c39manifiestos = C39manifiesto::where('tipo_man', '=', '1')
+						->where('createdBy','=',Auth::user()->username)	
+						->whereNull('ref')		
+						->orderBy('cod_man', 'desc')			
+						->get();
 
 
 		return View::make('c39manifiestos.index', compact('c39manifiestos'));
+	}
+
+	/**
+	 * Show the form for creating a new arribo
+	 *
+	 * @return Response
+	 */
+	public function manifiestoSalida($manifiesto)
+	{
+		$c39manifiesto = C39manifiesto::find($manifiesto);
+		return View::make('c39manifiestos.salida', compact('c39manifiesto')) ->with('listaPaises', C39pais::getListaPaises()) ->with('listaPuertos', C39puerto::getListaPuertos())->with('listaSitios', C39sitio::getListaSitios());
 	}
 
 
@@ -74,7 +169,8 @@ class C39manifiestosController extends \BaseController {
 	public function ingresarZarpe($manifiesto)
 	{
 		$c39manifiesto = C39manifiesto::find($manifiesto);
-		return View::make('c39manifiestos.ingresarZarpe', compact('c39manifiesto')) ->with('listaPaises', C39pais::getListaPaises()) ->with('listaPuertos', C39puerto::getListaPuertos())->with('listaSitios', C39sitio::getListaSitios());
+		$c39manifiestoBASE = C39manifiesto::find($c39manifiesto->ref);
+		return View::make('c39manifiestos.ingresarZarpe', compact('c39manifiesto')) ->with('base',$c39manifiestoBASE) ->with('listaPaises', C39pais::getListaPaises()) ->with('listaPuertos', C39puerto::getListaPuertos())->with('listaSitios', C39sitio::getListaSitios());
 	}
 
 	/**
@@ -96,15 +192,25 @@ class C39manifiestosController extends \BaseController {
 	public function store()
 	{
 		$validator = Validator::make($data = Input::all(), C39manifiesto::$rules);
+		$data['createdBy'] = Auth::user()->username;
 
 		if ($validator->fails())
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
-
+		
+		if(isset($data['cod_manOLD']))
+		{
+			$c39manifiesto = C39manifiesto::findOrFail($data['cod_manOLD']);
+			$c39manifiesto->update(array('ref' => '0'));
+			$data['ref'] = $data['cod_manOLD'];
+		}
+		
 		C39manifiesto::create($data);
-
-		return Redirect::to('c39manifiestos/arribo');
+		if(Auth::user()->id_rol == '1')
+			return Redirect::to('c39manifiestos/arribo');
+		else
+			return Redirect::to('c39manifiesto');
 	}
 
 

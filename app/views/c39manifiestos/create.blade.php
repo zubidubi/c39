@@ -1,16 +1,11 @@
 @extends('layout')
-@section('title') Crear encabezado Manifiesto @stop
+@section('title') Crear Manifiesto de Ingreso @stop
 
 @section('content')
        
     {{Form::open(array('action' => 'C39manifiestosController@store', 'class' => 'form-horizontal'))}}
 
-    	<div class="form-group">
-    		{{Form::label('tipo_man','Tipo manifiesto', array('class' => 'col-sm-2 control-label'))}}
-    		<div class="col-sm-4">
-    		{{Form::select('tipo_man', array('1' => 'Ingreso', '0' => 'Salida'), '1');}}
- 			</div>
-        </div>
+        {{Form::hidden('tipo_man', '1')}}
         <div class="form-group">
             {{Form::label('carga','Condicion carga', array('class' => 'col-sm-2 control-label'))}}
             <div class="col-sm-4">
@@ -52,7 +47,7 @@
           	{{Form::label('fecha_est','Fecha de arribo', array('class' => 'col-sm-2 control-label'))}}  	  	
 
           	<div class="col-sm-4">
-                <div class='input-group date' id='datetimepicker1' data-date-format="YYYY/MM/DD hh:mm">
+                <div class='input-group date' id='datetimepicker1' data-date-format="YYYY/MM/DD HH:mm">
                     {{Form::input('text','fecha_est', Input::old('date'), array('class' => 'form-control'))}}
                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -66,16 +61,7 @@
         </div>
     {{Form::close();}}
 
-    <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker1').datetimepicker({
-                    pick12HourFormat: 'false',
-                    language: 'es',
-                });
-                var date = new Date();
-                $('#datetimepicker1').data("DateTimePicker").setMinDate(new Date(date.getFullYear(), date.getMonth(), date.getDate()));
-            });
-        </script>
+    {{HTML::script('assets/js/dateTimePickerConfig.js')}}
 
 @stop
 

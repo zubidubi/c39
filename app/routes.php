@@ -35,8 +35,11 @@ Route::group(array('before' => 'auth'), function()
 		Route::resource('c39usuarios','C39usuariosController');
 		Route::resource('c39puertos','C39puertosController');
 		Route::resource('c39sitios','C39sitiosController');
-		Route::resource('c39rols','C39rolsController');
-		Route::resource('c39manifiestos','C39manifiestosController');
+		Route::resource('c39rols','C39rolsController');	
+		Route::get('c39manifiestos/salida', 'C39manifiestosController@index');	
+		Route::get('c39manifiestos/manifiestoSalida/{manifiesto}', 'C39manifiestosController@manifiestoSalida');
+		Route::post('c39manifiestos/manifiestoSalida/{manifiesto}', 'C39manifiestosController@store');
+		Route::post('c39manifiestos/create', 'C39manifiestosController@store');
 	});
 
 	//Naviera
@@ -51,15 +54,19 @@ Route::group(array('before' => 'auth'), function()
 		Route::get('c39manifiesto/create', 'C39manifiestosController@create');
 		Route::post('c39manifiesto/create', 'C39manifiestosController@store');
 		Route::get('c39manifiesto', 'C39manifiestosController@indexNav');
+		Route::get('c39manifiesto/manifiestoSalida/{manifiesto}', 'C39manifiestosController@manifiestoSalida');
+		Route::post('c39manifiesto/manifiestoSalida/{manifiesto}', 'C39manifiestosController@store');
 	});
-
+	Route::resource('c39manifiestos','C39manifiestosController');
     // Esta ruta nos servirá para cerrar sesión.
     Route::get('logout', 'AuthController@logOut');
     //cambio de contraseña
     Route::get('passwordChange', 'PasswordController@passwordChange');
 	Route::post('passwordChange', 'PasswordController@change');
 });
-
+Route::get('acta', 'C39manifiestosController@acta');
+Route::post('acta', 'C39manifiestosController@actaPOST');
+Route::get('print/{acta}', 'C39manifiestosController@printer');
 Route::group(array('before' => 'guest'), function()
 {
 	//index
