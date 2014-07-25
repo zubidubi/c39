@@ -14,6 +14,12 @@ class C39sitio extends \Eloquent {
 
 	protected $table = 'c39sitio';
 
+	public static function getSitio($id)
+	{
+		$sitio = C39sitio::find($id);
+		return $sitio->nom_sitio;
+	}
+
 	public static function getListaSitios()
 	{
 		$sitios = C39sitio::all();

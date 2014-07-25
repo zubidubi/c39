@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title') Encabezado manifiesto @stop
+@section('title') Manifiesto de Salida @stop
 
 @section('content')
 	<div class="panel panel-default">
@@ -30,10 +30,7 @@
 							<td>{{$manifiesto->fecha_est}}</td>						
 							<td>
 								<a href="{{URL::action('C39manifiestosController@manifiestoSalida', [$manifiesto->cod_man])}}" class="btn btn-info btn-xs" id="{{'s'.$manifiesto->cod_man}}">Generar Manifiesto Salida</a>
-								@if(Auth::user()->id_rol == 1)
-									<button type="button" class="btn btn-warning btn-xs" id={{'e'.$manifiesto->cod_puerto.''}}>Editar</button>
-									<button type="button" class="btn btn-danger btn-xs" id={{'d'.$manifiesto->cod_puerto.''}}>Eliminar</button>
-								@endif
+								
 								</td>							
 						</tr>
 					@endforeach

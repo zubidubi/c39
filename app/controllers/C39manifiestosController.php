@@ -20,7 +20,9 @@ class C39manifiestosController extends \BaseController {
 
 	public function actaPOST()
 	{
-		$c39manifiestos = C39manifiesto::whereNotNull('fecha_real')						
+		$c39manifiestos = C39manifiesto::whereNotNull('fecha_real')	
+						->whereRaw('YEAR(fecha_real) ='.Input::get('año'))		
+						->whereRaw('MONTH(fecha_real) ='.Input::get('mes'))				
 						->where('tipo_man', '=', Input::get('tipo_man'))		
 						->leftjoin('c39sitio', 'c39manifiesto.cod_sitio', '=', 'c39sitio.cod_sitio')
 						->where('c39sitio.cod_puerto', '=', Input::get('puerto'))	
@@ -36,17 +38,28 @@ class C39manifiestosController extends \BaseController {
 	public function printer($id)
 	{
 		$c39manifiesto = C39manifiesto::find($id);
+		Config::set('PDF::config.DOMPDF_ENABLE_CSS_FLOAT', true );
+		if($c39manifiesto->tipo_man == '1')
+			$tipo = 'recepción';
+		else
+			$tipo = 'zarpe';
 		$html = '<!DOCTYPE html>
 				<html lang ="es">
 					<head>
 						<meta charset="UTF-8">
+						<style>
+							h2 {text-align:center;}
+						</style>
 					</head>
 					<body>
 						<table>
 							<thead>
 								<tr>
-									<th></th>
-									<th></th>
+									<th><img src="assets/images/logo.png" alt="..." class="img-rounded"></th>
+									<th>Servicio Nacional de Aduanas - Puerto de San Antonio</th>
+								</tr>
+								<tr>
+									<th><h2>Acta de '.$tipo.' de nave</h2></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -54,11 +67,60 @@ class C39manifiestosController extends \BaseController {
 									<td>Nº Programación:</td>
 									<td>'.$c39manifiesto->cod_man.'</td>
 								</tr>
+								<tr>
+									<td>Condición Carga:</td>
+									<td>'.$c39manifiesto->carga.'</td>
+								</tr>
+								<tr>
+									<td>Viaje:</td>
+									<td>'.$c39manifiesto->viaje.'</td>
+								</tr>
+								<tr>
+									<td>Nombre Nave:</td>
+									<td>'.$c39manifiesto->nom_nave.'</td>
+								</tr>
+								<tr>
+									<td>Registro Nave:</td>
+									<td>'.$c39manifiesto->reg_nave.'</td>
+								</tr>
+								<tr>
+									<td>Bandera:</td>
+									<td>'.$c39manifiesto->cod_pais.' - '.C39pais::getPais($c39manifiesto->cod_pais).'</td>
+								</tr>
+								<tr>
+									<td>Sitio Atraque:</td>
+									<td>'.$c39manifiesto->cod_sitio.' - '.C39sitio::getSitio($c39manifiesto->cod_sitio).'</td>
+								</tr>
+								<tr>
+									<td>Fecha y hora de '.$tipo.':</td>
+									<td>'.$c39manifiesto->fecha_real.'</td>
+								</tr>
+								<tr>
+									<td>Armador:</td>
+									<td>'.$c39manifiesto->armador.'</td>
+								</tr>
+								<tr>
+									<td>Puerto de origen:</td>
+									<td>'.$c39manifiesto->puerto_org.' - '.C39puerto::getPuerto($c39manifiesto->puerto_org).'</td>
+								</tr>
+								<tr>
+									<td>Último puerto:</td>
+									<td>'.$c39manifiesto->ult_puerto.' - '.C39puerto::getPuerto($c39manifiesto->ult_puerto).'</td>
+								</tr>
+								<tr>
+									<td>Próximo puerto:</td>
+									<td>'.$c39manifiesto->prox_puerto.' - '.C39puerto::getPuerto($c39manifiesto->prox_puerto).'</td>
+								</tr>
+								<tr>
+									<td>Observaciones:</td>
+									<td>'.$c39manifiesto->observacion.'</td>
+								</tr>
+
 							</tbody>
 						</table>
 					</body>
 				</html>';
-		Config::set('PDF::config.DOMPDF_ENABLE_CSS_FLOAT', true );
+		
 		return PDF::load($html, 'A4', 'portrait')->show();
 	}
 
@@ -70,6 +132,7 @@ class C39manifiestosController extends \BaseController {
 	public function arribo()
 	{
 		$c39manifiestos = C39manifiesto::whereNull('fecha_real')
+						->where('activo', '=', '1')
 						->where('tipo_man', '=', '1')
 						->orderBy('cod_man', 'desc')
 						->get();
@@ -87,6 +150,7 @@ class C39manifiestosController extends \BaseController {
 	public function zarpe()
 	{
 		$c39manifiestos = C39manifiesto::whereNull('fecha_real')
+						->where('activo', '=', '1')
 						->where('tipo_man', '=', '0')
 						->orderBy('cod_man', 'desc')
 						->get();
@@ -114,6 +178,7 @@ class C39manifiestosController extends \BaseController {
 	public function index()
 	{
 		$c39manifiestos = C39manifiesto::where('tipo_man', '=', '1')
+						->where('activo', '=', '1')
 						->whereNull('ref')	
 						->orderBy('cod_man', 'desc')				
 						->get();
@@ -129,6 +194,7 @@ class C39manifiestosController extends \BaseController {
 	public function indexNav()
 	{
 		$c39manifiestos = C39manifiesto::where('tipo_man', '=', '1')
+						->where('activo', '=', '1')
 						->where('createdBy','=',Auth::user()->username)	
 						->whereNull('ref')		
 						->orderBy('cod_man', 'desc')			
@@ -270,9 +336,10 @@ class C39manifiestosController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		C39manifiesto::destroy($id);
-
-		return Redirect::route('c39manifiestos.index');
+		$c39manifiesto = C39manifiesto::findOrFail($id);
+		//C39manifiesto::destroy($id);
+		$c39manifiesto->update(array('activo' => false));
+		return Redirect::back();
 	}
 
 }

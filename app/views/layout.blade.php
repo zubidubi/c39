@@ -9,38 +9,50 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @if(Auth::user()->id_rol == '1')
-                    <a class="navbar-brand" href="{{URL::to('indexAdmin')}}">Aduanas Admin</a>
-                @elseif(Auth::user()->id_rol == '2')    
-                    <a class="navbar-brand" href="{{URL::to('indexNav')}}">Aduanas Naviera</a>
+                @if(Auth::user() != null)
+                    @if(Auth::user()->id_rol == '1')
+                        <a class="navbar-brand" href="{{URL::to('indexAdmin')}}">Aduanas Admin</a>
+                    @elseif(Auth::user()->id_rol == '2')    
+                        <a class="navbar-brand" href="{{URL::to('indexNav')}}">Aduanas Naviera</a>                    
+                    @endif
                 @else
                     <a class="navbar-brand" href="{{URL::to('index')}}">Aduanas</a>
                 @endif
+
             </div>
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-        
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> {{Auth::user()->username}} <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="{{URL::to('passwordChange')}}"><i class="fa fa-gear fa-fw"></i> Cambiar contraseña</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="{{URL::to('logout')}}"><i class="fa fa-sign-out fa-fw"></i> Cerrar sesión</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
+                @if(Auth::user() != null)
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw"></i> {{Auth::user()->username}} <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="{{URL::to('passwordChange')}}"><i class="fa fa-gear fa-fw"></i> Cambiar contraseña</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="{{URL::to('logout')}}"><i class="fa fa-sign-out fa-fw"></i> Cerrar sesión</a>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-user -->
+                    </li>
+                @else
+                    <li>
+                        <a href="{{URL::action('AuthController@showLogin')}}" type="button" class="btn btn-info"> Login</a>
+                    </li>
+                @endif
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
-            @if(Auth::user()->id_rol == '1')
-                @include('sidebarAdmin')
+            @if(Auth::user() != null)
+                @if(Auth::user()->id_rol == '1')
+                    @include('sidebarAdmin')
+                @else
+                    @include('sidebarNav')
+                @endif
             @else
-                @include('sidebarNav')
+                @include('sidebar')
             @endif
             
         </nav>

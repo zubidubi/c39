@@ -10,6 +10,14 @@ class C39pais extends \Eloquent {
 	// Don't forget to fill this array
 	protected $fillable = [];
 
+	protected $primaryKey = 'cod_pais';
+
+	public static function getPais($id)
+	{
+		$pais = C39pais::find($id);
+		return $pais->nom_pais;
+	}
+
 	public static function getListaPaises()
 	{
 		$paises = C39pais::all();

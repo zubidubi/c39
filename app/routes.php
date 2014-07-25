@@ -24,7 +24,10 @@ Route::group(array('before' => 'auth'), function()
 
 		Route::get('c39manifiestos/ingresarArribo/{manifiesto}', 'C39manifiestosController@ingresarArribo');
 		Route::get('c39manifiestos/ingresarZarpe/{manifiesto}', 'C39manifiestosController@ingresarZarpe');
-		Route::get('c39manifiestos/editarUsuario/{usuario}', 'C39usuariosController@editarUsuario');
+		Route::get('c39manifiestos/editarUsuario/{usuario}'	, 'C39usuariosController@editarUsuario');
+		Route::get('c39manifiestos/edit/{manifiesto}', 'C39manifiestosController@edit');
+		Route::get('c39manifiestos/destroy/{manifiesto}', 'C39manifiestosController@destroy');
+		Route::post('c39manifiestos/edit/{manfiesto}', 'C39manifiestosController@update');
 		Route::post('c39manifiestos/update', 'C39manifiestosController@update');
 		Route::post('c39usuarios/update', 'C39usuariosController@update');
 
