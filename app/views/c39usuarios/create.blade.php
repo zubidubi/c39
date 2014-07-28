@@ -17,10 +17,18 @@
             {{Form::select('id_rol', $listaRoles, '1')}}
             </div>
         </div>
+        <!--TODO CHILE
         <div class="form-group">
             {{Form::label('cod_puertolb','Puerto', array('class' => 'col-sm-2 control-label'))}}
              <div class="col-sm-4">
             {{Form::select('cod_puerto', $listaPuertos, '1')}}
+            </div>
+        </div> -->
+        <!-- SAN ANTONIO: -->
+        <div class="form-group">
+            {{Form::label('cod_puertolb','Puerto', array('class' => 'col-sm-2 control-label'))}}
+             <div class="col-sm-4">
+            {{Form::select('cod_puerto', array('906' => 'San Antonio'), array('disabled'));}}
             </div>
         </div>
         <div class="form-group">

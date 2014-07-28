@@ -38,6 +38,12 @@
             </div>
         </div>
         <div class="form-group">
+            {{Form::label('agente','Agente', array('class' => 'col-sm-2 control-label'))}}
+            <div class="col-sm-4">
+            {{Form::text('agente', $c39manifiesto->agente, array('class' => 'form-control', 'placeholder' => 'Agente', 'disabled'))}}
+            </div>
+        </div>
+        <div class="form-group">
             {{Form::label('cod_pais','Bandera', array('class' => 'col-sm-2 control-label', 'disabled'))}}
             <div class="col-sm-4">
     		{{Form::select('cod_pais', $listaPaises, $c39manifiesto->cod_pais, array('disabled'))}}
@@ -94,7 +100,7 @@
         <div class="form-group">
             {{Form::label('observacion','Observación', array('class' => 'col-sm-2 control-label'))}}
             <div class="col-sm-4">
-            {{Form::text('observacion', Input::old('observacion'), array('class' => 'form-control', 'placeholder' => 'Observación'))}}
+            {{Form::textarea('observacion', Input::old('observacion'), array('class' => 'form-control', 'placeholder' => 'Observación'))}}
             </div>
         </div>
 

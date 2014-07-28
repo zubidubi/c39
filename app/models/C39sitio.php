@@ -22,7 +22,11 @@ class C39sitio extends \Eloquent {
 
 	public static function getListaSitios()
 	{
-		$sitios = C39sitio::all();
+		//TODO CHILE
+		//$sitios = C39sitio::all();
+
+		//SÓLO SAN ANTONIO
+		$sitios = C39sitio::where('cod_puerto', '=', 906)->get();
 
 		foreach ($sitios as $sitio) 
 		{

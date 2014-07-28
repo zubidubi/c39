@@ -17,7 +17,7 @@ class C39usuario extends Eloquent implements UserInterface, RemindableInterface{
 	protected $table = 'c39usuarios';
 
 	// Don't forget to fill this array
-	protected $fillable = ['rut','id_rol', 'cod_puerto', 'nombre', 'username', 'password'];
+	protected $fillable = ['rut','id_rol', 'cod_puerto', 'nombre', 'username', 'password', 'email'];
 
 	// este metodo se debe implementar por la interfaz
     public function getAuthIdentifier()

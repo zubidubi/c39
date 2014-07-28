@@ -10,7 +10,7 @@ class PasswordController extends  BaseController {
 	public function change()
 	{
 		$rules = array(
-        'old_password' => 'required|alphaNum|between:6,16',
+        'old_password' => 'required|alphaNum|between:3,16',
         'password' => 'required|alphaNum|between:6,16|confirmed'
     	);
 	    $validator = Validator::make(Input::all(), $rules);
@@ -22,16 +22,16 @@ class PasswordController extends  BaseController {
 	        {
 	        	$user->password = Hash::make(Input::get('password'));
 	        	$user->save();
-	        	return Redirect::to('/');
+	        	return Redirect::action('PasswordController@passwordChange')->with('ok', 'Contraseña cambiada correctamente.');
 	        }	
 	        else
 	        {
-	        	return Redirect::action('PasswordController@passwordChange')->withErrors('Contraseña Incorrecta');
+	        	return Redirect::action('PasswordController@passwordChange')->withErrors('Contraseña Incorrecta.');
 	        }        
 	    }
 	    else
 	    {
-	        return Redirect::action('PasswordController@passwordChange')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
+	        return Redirect::action('PasswordController@passwordChange')->withErrors('La nueva contraseña es incorrecta.');
 		}
 	}
 }

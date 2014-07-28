@@ -29,6 +29,9 @@
                         </fieldset>
                     {{ Form::close() }}
                 </div>
+                <div class="panel-footer">
+                    {{HTML::linkAction('RemindersController@getRemind', '¿Olvidó su contraseña?')}}
+                </div>
             </div>
         </div>        
     </div>

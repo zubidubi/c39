@@ -4,53 +4,58 @@
 @section('content')
        
 	<div class="panel panel-default">
-        <div class="panel-heading"> Encabezado manifiesto</div>
+        <div class="panel-heading"> Búsqueda de actas</div>
         <div class="panel-body">
 
         	{{Form::open(array('onsubmit' => 'return false', 'id' => 'filtro', 'class' => 'form-inline'))}}
-        		<div class="form-group">
-		            {{Form::label('puerto','Puerto', array('class' => 'col-sm-2 control-label'))}}
-		            <div class="col-sm-4">
-		            {{Form::select('puerto', C39puerto::getListaPuertos(), '1')}}
-		            </div>
-		        </div>
-		        <div class="form-group">
-		    		{{Form::label('tipo_man','Tipo manifiesto', array('class' => 'col-sm-2 control-label'))}}
-		    		<div class="col-sm-4">
-		    		{{Form::select('tipo_man', array('1' => 'Ingreso', '0' => 'Salida'), '1')}}
-		 			</div>
-          <div class="form-group">
-            {{Form::label('año','Año', array('class' => 'col-sm-2 control-label'))}}
-            <div class="col-sm-4">
-              <?php 
-                $as =  range(date('Y'), '2014');
-                for ($i = 0; $i < sizeof($as); $i++) 
-                {
-                  $años[]= array($as[$i] => $as[$i]);
-                }
-              ?>
-            {{Form::select('año', $años, date('Y'))}}
-          </div>
-            </div>
-          <div class="form-group">
-            {{Form::label('mes','Mes', array('class' => 'col-sm-2 control-label'))}}
-            <div class="col-sm-4">
-              <?php 
-                $meses = array('01' => 'Enero', '02' => 'Febrero', '03' => 'Marzo', '04' => 'Abril',
-                              '05' => 'Mayo', '06' => 'Junio', '07' => 'Julio', '08' => 'Agosto', 
-                              '09' => 'Septiembre', '10' => 'Octubre', '11' => 'Noviembre', '12' => 'Diciembre');
-              ?>
-            {{Form::select('mes', $meses, date('m'))}}
-          </div>
-          
-		        
-		        {{ Form::submit('Filtrar', array('class' => 'btn btn-info')) }}
+          <table class="table table-condensed">
+            <tr  class="info">
+              <th>
+                <!--TODO CHILE
+                {{Form::select('puerto', C39puerto::getListaPuertos(), '1')}} 
+                SAN ANTONIO:-->
+      		      {{Form::label('puerto','Puerto', array('class' => 'col-sm-5 control-label'))}}
+                {{Form::select('puerto', array('906' => 'San Antonio'))}}   
+              </th>
+              <th>
+                {{Form::label('tipo_man','Tipo manifiesto', array('class' => 'col-sm-5 control-label'))}}
+                {{Form::select('tipo_man', array('1' => 'Ingreso', '0' => 'Salida'), '1')}}
+              </th>
+             </tr>
+             <tr  class="info">
+              <th>      
+                {{Form::label('año','Año', array('class' => 'col-sm-5 control-label'))}}
+                  <?php 
+                    $as =  range(date('Y'), '2014');
+                    for ($i = 0; $i < sizeof($as); $i++) 
+                    {
+                      $años[]= array($as[$i] => $as[$i]);
+                    }
+                  ?>
+                {{Form::select('año', $años, date('Y'))}}
+              </th>
+              <th>
+                {{Form::label('mes','Mes', array('class' => 'col-sm-5 control-label'))}}
+                  <?php 
+                      $meses = array('01' => 'Enero', '02' => 'Febrero', '03' => 'Marzo', '04' => 'Abril',
+                                    '05' => 'Mayo', '06' => 'Junio', '07' => 'Julio', '08' => 'Agosto', 
+                                    '09' => 'Septiembre', '10' => 'Octubre', '11' => 'Noviembre', '12' => 'Diciembre');
+                    ?>
+                  {{Form::select('mes', $meses, date('m'))}}
+              </th>
+            </tr>
+            <tr>
+              <th>
+                {{ Form::submit('Filtrar', array('class' => 'btn btn-info')) }}
+              </th>
+            </tr>        
+        </table>
 		    {{Form::close()}}
 
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Nº Programación</th>
+                        <th>Nº Manifiesto</th>
                         <th>Puerto</th>
                         <th>Nombre Nave</th>
                         <th>Nº Viaje</th>
@@ -63,7 +68,7 @@
                 </thead>
                 <tbody id="resp">                   
                 </tbody>
-            </table>
+            </table>            
         </div>
         <div class="panel-footer"></div>
     </div>   

@@ -40,9 +40,15 @@ class C39manifiestosController extends \BaseController {
 		$c39manifiesto = C39manifiesto::find($id);
 		Config::set('PDF::config.DOMPDF_ENABLE_CSS_FLOAT', true );
 		if($c39manifiesto->tipo_man == '1')
-			$tipo = 'recepción';
+			$tipo = 'RECEPCIÓN';
 		else
-			$tipo = 'zarpe';
+			$tipo = 'ZARPE';
+
+		if($c39manifiesto->carga == '1')
+			$opc = 'SÍ';
+		else
+			$opc = 'NO';
+
 		$html = '<!DOCTYPE html>
 				<html lang ="es">
 					<head>
@@ -53,70 +59,73 @@ class C39manifiestosController extends \BaseController {
 					</head>
 					<body>
 						<table>
-							<thead>
+							<tr>
+								<th><img src="assets/images/logo.png" alt="..." class="img-rounded"></th>
+								<th>Servicio Nacional de Aduanas - Puerto de San Antonio</th>
+
+							</tr>
+							<h2>ACTA DE  '.$tipo.' DE NAVE [CABOTAJE]</h2>
+						</table>
+						<table>
+					
 								<tr>
-									<th><img src="assets/images/logo.png" alt="..." class="img-rounded"></th>
-									<th>Servicio Nacional de Aduanas - Puerto de San Antonio</th>
-								</tr>
-								<tr>
-									<th><h2>Acta de '.$tipo.' de nave</h2></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>Nº Programación:</td>
+									<td>Nº PROGRAMACIÓN:</td>
 									<td>'.$c39manifiesto->cod_man.'</td>
 								</tr>
 								<tr>
-									<td>Condición Carga:</td>
-									<td>'.$c39manifiesto->carga.'</td>
+									<td>CONDICIÓN CARGA:</td>
+									<td>'.$opc.'</td>
 								</tr>
 								<tr>
-									<td>Viaje:</td>
+									<td>VIAJE:</td>
 									<td>'.$c39manifiesto->viaje.'</td>
 								</tr>
 								<tr>
-									<td>Nombre Nave:</td>
+									<td>NOMBRE NAVE:</td>
 									<td>'.$c39manifiesto->nom_nave.'</td>
 								</tr>
 								<tr>
-									<td>Registro Nave:</td>
+									<td>REGISTRO NAVE:</td>
 									<td>'.$c39manifiesto->reg_nave.'</td>
 								</tr>
 								<tr>
-									<td>Bandera:</td>
+									<td>AGENTE:</td>
+									<td>'.$c39manifiesto->agente.'</td>
+								</tr>
+								<tr>					
+									<td>BANDERA:</td>
 									<td>'.$c39manifiesto->cod_pais.' - '.C39pais::getPais($c39manifiesto->cod_pais).'</td>
 								</tr>
 								<tr>
-									<td>Sitio Atraque:</td>
-									<td>'.$c39manifiesto->cod_sitio.' - '.C39sitio::getSitio($c39manifiesto->cod_sitio).'</td>
-								</tr>
-								<tr>
-									<td>Fecha y hora de '.$tipo.':</td>
-									<td>'.$c39manifiesto->fecha_real.'</td>
-								</tr>
-								<tr>
-									<td>Armador:</td>
+									<td>ARMADOR:</td>
 									<td>'.$c39manifiesto->armador.'</td>
 								</tr>
 								<tr>
-									<td>Puerto de origen:</td>
+									<td>SITIO ATRAQUE:</td>
+									<td>'.$c39manifiesto->cod_sitio.' - '.C39sitio::getSitio($c39manifiesto->cod_sitio).'</td>
+								</tr>
+								<tr>
+									<td>FECHA Y HORA DE '.$tipo.':</td>
+									<td>'.$c39manifiesto->fecha_real.'</td>
+								</tr>
+								<tr>
+									<td>PUERTO ORIGEN:</td>
 									<td>'.$c39manifiesto->puerto_org.' - '.C39puerto::getPuerto($c39manifiesto->puerto_org).'</td>
 								</tr>
 								<tr>
-									<td>Último puerto:</td>
+									<td>ÚLTIMO PUERTO:</td>
 									<td>'.$c39manifiesto->ult_puerto.' - '.C39puerto::getPuerto($c39manifiesto->ult_puerto).'</td>
 								</tr>
 								<tr>
-									<td>Próximo puerto:</td>
+									<td>PRÓXIMO PUERTO:</td>
 									<td>'.$c39manifiesto->prox_puerto.' - '.C39puerto::getPuerto($c39manifiesto->prox_puerto).'</td>
 								</tr>
 								<tr>
-									<td>Observaciones:</td>
+									<td>OBSERVACIONES:</td>
 									<td>'.$c39manifiesto->observacion.'</td>
 								</tr>
 
-							</tbody>
+					
 						</table>
 					</body>
 				</html>';
@@ -274,9 +283,11 @@ class C39manifiestosController extends \BaseController {
 		
 		C39manifiesto::create($data);
 		if(Auth::user()->id_rol == '1')
-			return Redirect::to('c39manifiestos/arribo');
+			return Redirect::to('c39manifiestos/arribo')
+                    ->with('mensaje_crea', 'Encabezado de manifiesto creado.');
 		else
-			return Redirect::to('c39manifiesto');
+			return Redirect::to('c39manifiesto')
+					->with('mensaje_crea', 'Encabezado de manifiesto creado.');
 	}
 
 

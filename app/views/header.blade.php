@@ -8,5 +8,6 @@
         {{HTML::style('assets/font-awesome/css/font-awesome.css')}}
         {{HTML::style('assets/css/sb-admin.css')}}
         {{HTML::script('assets/js/jquery-1.10.2.js')}}
+
 	</head>
     <body>

@@ -8,6 +8,7 @@
         {{Form::hidden('cod_man', $c39manifiesto->cod_man)}}
         {{Form::hidden('cod_sitio', $base->cod_sitio)}}
         {{Form::hidden('armador', $base->armador)}}
+        {{Form::hidden('agente', $base->agente)}}
         {{Form::hidden('puerto_org', $base->puerto_org)}}
         {{Form::hidden('ult_puerto', $base->ult_puerto)}}
         {{Form::hidden('prox_puerto', $base->prox_puerto)}}
@@ -33,6 +34,12 @@
         	{{Form::label('reg_nave','Registro Nave', array('class' => 'col-sm-2 control-label'))}}
         	<div class="col-sm-4">
         	{{Form::text('reg_nave', $c39manifiesto->reg_nave, array('class' => 'form-control', 'placeholder' => 'Registro Nave', 'disabled'))}}
+            </div>
+        </div>
+        <div class="form-group">
+            {{Form::label('agente','Agente', array('class' => 'col-sm-2 control-label'))}}
+            <div class="col-sm-4">
+            {{Form::text('agente', $c39manifiesto->agente, array('class' => 'form-control', 'placeholder' => 'Agente', 'disabled'))}}
             </div>
         </div>
         <div class="form-group">
@@ -81,7 +88,7 @@
         <div class="form-group">
             {{Form::label('observacion','Observación', array('class' => 'col-sm-2 control-label'))}}
             <div class="col-sm-4">
-            {{Form::text('observacion', $base->observacion, array('class' => 'form-control', 'placeholder' => 'Observacion'))}}
+            {{Form::textarea('observacion', $base->observacion, array('class' => 'form-control', 'placeholder' => 'Observacion'))}}
             </div>
         </div>
 

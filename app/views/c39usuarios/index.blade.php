@@ -31,7 +31,7 @@
 							<td>{{C39puerto::getPuerto($usuario->cod_puerto)}}</td>
 							<td>
 								<a href={{''.URL::action('C39usuariosController@edit', [$usuario->rut]).''}} class="btn btn-info btn-xs" id={{'i'.$usuario->rut.''}}>Editar</a>
-								<button type="button" class="btn btn-danger btn-xs" id={{'d'.$usuario->rut.''}}>Eliminar</button>
+								<a href={{''.URL::action('C39usuariosController@destroy', [$usuario->rut]).''}} class="btn btn-danger btn-xs" id={{'d'.$usuario->rut.''}}>Eliminar</a>
 							</td>
 						</tr>
 					@endforeach

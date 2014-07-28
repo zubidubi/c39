@@ -10,6 +10,7 @@
         {{Form::hidden('viaje', $c39manifiesto->viaje)}}
         {{Form::hidden('nom_nave', $c39manifiesto->nom_nave)}}
         {{Form::hidden('reg_nave', $c39manifiesto->reg_nave)}}
+        {{Form::hidden('agente', $c39manifiesto->agente)}}
         {{Form::hidden('cod_pais', $c39manifiesto->cod_pais)}}
         {{Form::hidden('cod_sitio', $c39manifiesto->cod_sitio)}}
         <div class="form-group">
@@ -34,6 +35,12 @@
             {{Form::label('reg_nave','Registro Nave', array('class' => 'col-sm-2 control-label'))}}
             <div class="col-sm-4">
             {{Form::text('reg_naved', $c39manifiesto->reg_nave, array('class' => 'form-control', 'placeholder' => 'Registro Nave', 'disabled'))}}
+            </div>
+        </div>
+        <div class="form-group">
+            {{Form::label('agente','Agente', array('class' => 'col-sm-2 control-label'))}}
+            <div class="col-sm-4">
+            {{Form::text('agented', $c39manifiesto->agente, array('class' => 'form-control', 'placeholder' => 'Agente', 'disabled'))}}
             </div>
         </div>
         <div class="form-group">

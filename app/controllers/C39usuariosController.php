@@ -78,9 +78,11 @@ class C39usuariosController extends  BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	//public function update($id)
+	public function update()
 	{
-		$c39usuario = C39usuario::findOrFail($id);
+		//$c39usuario = C39usuario::findOrFail($id);
+		$c39usuario = C39usuario::findOrFail(Input::get('rut'));
 
 		$validator = Validator::make($data = Input::all(), C39usuario::$rules);
 

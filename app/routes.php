@@ -34,6 +34,7 @@ Route::group(array('before' => 'auth'), function()
 		Route::get('c39manifiestos/arribo', 'C39manifiestosController@arribo');
 		Route::get('c39manifiestos/zarpe', 'C39manifiestosController@zarpe');
 		Route::post('c39usuarios/create', 'C39usuariosController@store');
+		Route::get('c39usuarios/destroy/{usuario}', 'C39usuariosController@destroy');
 
 		Route::resource('c39usuarios','C39usuariosController');
 		Route::resource('c39puertos','C39puertosController');

@@ -11,9 +11,11 @@
                 </button>
                 @if(Auth::user() != null)
                     @if(Auth::user()->id_rol == '1')
-                        <a class="navbar-brand" href="{{URL::to('indexAdmin')}}">Aduanas Admin</a>
+                      <!--  <a class="navbar-brand" href="{{URL::to('indexAdmin')}}">Aduanas Admin</a> -->
+                     <a class="navbar-brand">Sistema Nacional de Aduanas - Cabotaje</a> 
                     @elseif(Auth::user()->id_rol == '2')    
-                        <a class="navbar-brand" href="{{URL::to('indexNav')}}">Aduanas Naviera</a>                    
+                       <!--   <a class="navbar-brand" href="{{URL::to('indexNav')}}">Aduanas Naviera</a>  --> 
+                       <a class="navbar-brand">Sistema Nacional de Aduanas - Cabotaje</a>                  
                     @endif
                 @else
                     <a class="navbar-brand" href="{{URL::to('index')}}">Aduanas</a>

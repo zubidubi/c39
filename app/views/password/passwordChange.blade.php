@@ -1,7 +1,14 @@
 @extends('layout')
 @section('title') Cambiar contraseña @stop
 
+
 @section('content')
+    @if(Session::has('errors'))
+    <p class="alert alert-danger">{{ implode('', $errors->all()) }}</p>
+    @endif
+    @if(Session::has('ok'))
+        <p class="alert alert-success">{{ Session::get('ok') }}</p>
+    @endif
     {{Form::open(array('action' => 'PasswordController@change', 'class' => 'form-horizontal'))}}
     	<div class="form-group">
             {{Form::label('passwordlb','Contraseña Actual', array('class' => 'col-sm-2 control-label'))}}

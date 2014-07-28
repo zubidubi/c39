@@ -31,6 +31,12 @@
             </div>
         </div>
         <div class="form-group">
+            {{Form::label('agente','Agente', array('class' => 'col-sm-2 control-label'))}}
+            <div class="col-sm-4">
+            {{Form::text('agente', Input::old('agente'), array('class' => 'form-control', 'placeholder' => 'Agente'))}}
+            </div>
+        </div>
+        <div class="form-group">
             {{Form::label('cod_pais','Bandera', array('class' => 'col-sm-2 control-label'))}}
             <div class="col-sm-4">
     		{{Form::select('cod_pais', $listaPaises, '1')}}
@@ -60,6 +66,8 @@
             </div>
         </div>
     {{Form::close();}}
+
+
 
     {{HTML::script('assets/js/dateTimePickerConfig.js')}}
 
