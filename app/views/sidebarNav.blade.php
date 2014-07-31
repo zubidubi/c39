@@ -13,10 +13,13 @@
                     </li>
                     <li>
                         <a href="{{URL::to('c39manifiesto')}}">Listado de manifiestos</a>
-                    </li>
+                    </li>                    
                 </ul>
                 <!-- /.nav-second-level -->
-            </li>    
+            </li>  
+            <li>
+                <a href="{{URL::to('acta')}}"><i class="glyphicon glyphicon-file"></i> Actas</a>                
+            </li>   
               
                         
         </ul>

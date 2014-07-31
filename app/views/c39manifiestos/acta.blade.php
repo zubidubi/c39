@@ -63,7 +63,7 @@
                         <th>Fecha Arribo/Zarpe Estimado</th>
                         <th>Fecha Arribo/Zarpe Real</th>
                         <th>Estado</th>
-                        @if(Auth::user() != null)
+                        @if(Auth::user()->id_rol == '1')
                         <th>Control</th>
                         @endif
                     </tr>
@@ -103,11 +103,17 @@
 		                    html += '<td>' + respuesta[i].viaje + ' </td>';
 		                    html += '<td>' + respuesta[i].cod_sitio + ' </td>';
 		                    html += '<td>' + respuesta[i].fecha_est + ' </td>';
-		                    html += '<td>' + respuesta[i].fecha_real + ' </td>';
-		                    html += '<td>' + respuesta[i].activo + ' </td>';
-                        @if(Auth::user() != null)
-		                    html += '<td> <a href="'+route + respuesta[i].cod_man +'" class="btn btn-default" id="p' + respuesta[i].cod_man + '"><i class="glyphicon glyphicon-print"></i></a> </td>';
-                        @endif
+                        if(respuesta[i].fecha_real != null)
+		                      html += '<td>' + respuesta[i].fecha_real + ' </td>';
+                        else
+                          html += '<td> </td>';
+                        if(respuesta[i].activo)
+		                      html += '<td> ACTIVO </td>';
+                        else
+                          html += '<td> ANULADO </td>';
+                        if({{Auth::user()->id_rol}} == '1')
+		                      html += '<td> <a href="'+route + respuesta[i].cod_man +'" class="btn btn-default" id="p' + respuesta[i].cod_man + '"><i class="glyphicon glyphicon-print"></i></a> </td>';
+                        
 		                    html += '</tr>';
 		                   /* html += '<td> <button type="button" class="btn btn-default" id="p' + respuesta[i].cod_man + '"><i class="glyphicon glyphicon-print"></i></button> </td>';
 		                    html += '</tr>';
