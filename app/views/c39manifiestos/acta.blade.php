@@ -62,8 +62,10 @@
                         <th>Sitio</th>                        
                         <th>Fecha Arribo/Zarpe Estimado</th>
                         <th>Fecha Arribo/Zarpe Real</th>
-                        <th>Tipo</th>
+                        <th>Estado</th>
+                        @if(Auth::user() != null)
                         <th>Control</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody id="resp">                   
@@ -102,8 +104,10 @@
 		                    html += '<td>' + respuesta[i].cod_sitio + ' </td>';
 		                    html += '<td>' + respuesta[i].fecha_est + ' </td>';
 		                    html += '<td>' + respuesta[i].fecha_real + ' </td>';
-		                    html += '<td>' + respuesta[i].tipo_man + ' </td>';
+		                    html += '<td>' + respuesta[i].activo + ' </td>';
+                        @if(Auth::user() != null)
 		                    html += '<td> <a href="'+route + respuesta[i].cod_man +'" class="btn btn-default" id="p' + respuesta[i].cod_man + '"><i class="glyphicon glyphicon-print"></i></a> </td>';
+                        @endif
 		                    html += '</tr>';
 		                   /* html += '<td> <button type="button" class="btn btn-default" id="p' + respuesta[i].cod_man + '"><i class="glyphicon glyphicon-print"></i></button> </td>';
 		                    html += '</tr>';

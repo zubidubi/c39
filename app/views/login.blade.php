@@ -29,8 +29,11 @@
                         </fieldset>
                     {{ Form::close() }}
                 </div>
+                <!--<div class="panel-footer">
+                    {{HTML::linkAction('RemindersController@getRemind', '¿Olvidó su contraseña?')}}                    
+                </div> -->
                 <div class="panel-footer">
-                    {{HTML::linkAction('RemindersController@getRemind', '¿Olvidó su contraseña?')}}
+                    <a href="{{URL::to('/')}}"><i class="glyphicon glyphicon-home"></i> Volver al inicio</a>                   
                 </div>
             </div>
         </div>        

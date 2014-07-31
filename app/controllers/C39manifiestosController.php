@@ -10,7 +10,11 @@ class C39manifiestosController extends \BaseController {
 
 	public function acta()
 	{
-		$c39manifiestos = C39manifiesto::whereNotNull('fecha_real')
+		//$c39manifiestos = C39manifiesto::whereNotNull('fecha_real')
+
+		//$c39manifiestos = C39manifiesto::all()
+
+		$c39manifiestos = C39manifiesto::whereNotNull('fecha_est')
 						->orderBy('cod_man', 'desc')
 						->get();
 		
@@ -20,9 +24,12 @@ class C39manifiestosController extends \BaseController {
 
 	public function actaPOST()
 	{
-		$c39manifiestos = C39manifiesto::whereNotNull('fecha_real')	
-						->whereRaw('YEAR(fecha_real) ='.Input::get('año'))		
-						->whereRaw('MONTH(fecha_real) ='.Input::get('mes'))				
+		//$c39manifiestos = C39manifiesto::whereNotNull('fecha_real')	
+		$c39manifiestos = C39manifiesto::whereNotNull('fecha_est')	
+						/*->whereRaw('YEAR(fecha_real) ='.Input::get('año'))		
+						->whereRaw('MONTH(fecha_real) ='.Input::get('mes'))*/
+						->whereRaw('YEAR(fecha_est) ='.Input::get('año'))		
+						->whereRaw('MONTH(fecha_est) ='.Input::get('mes'))				
 						->where('tipo_man', '=', Input::get('tipo_man'))		
 						->leftjoin('c39sitio', 'c39manifiesto.cod_sitio', '=', 'c39sitio.cod_sitio')
 						->where('c39sitio.cod_puerto', '=', Input::get('puerto'))	
@@ -284,11 +291,11 @@ class C39manifiestosController extends \BaseController {
 		C39manifiesto::create($data);
 		if(Auth::user()->id_rol == '1')
 			return Redirect::to('c39manifiestos/arribo')
-                    ->with('mensaje_crea', 'Encabezado de manifiesto creado.');
+                    ->with('mensaje_crea', 'Manifiesto creado.');
 		else
 			return Redirect::to('c39manifiesto')
-					->with('mensaje_crea', 'Encabezado de manifiesto creado.');
-	}
+					->with('mensaje_crea', 'Manifiesto creado.');
+	}	
 
 
 	/**

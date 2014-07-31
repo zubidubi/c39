@@ -57,10 +57,12 @@ Route::group(array('before' => 'auth'), function()
 
 		Route::get('c39manifiesto/create', 'C39manifiestosController@create');
 		Route::post('c39manifiesto/create', 'C39manifiestosController@store');
-		Route::get('c39manifiesto', 'C39manifiestosController@indexNav');
+		Route::get('c39manifiesto', 'C39manifiestosController@indexNav');	
 		Route::get('c39manifiesto/manifiestoSalida/{manifiesto}', 'C39manifiestosController@manifiestoSalida');
 		Route::post('c39manifiesto/manifiestoSalida/{manifiesto}', 'C39manifiestosController@store');
 	});
+
+
 	Route::resource('c39manifiestos','C39manifiestosController');
     // Esta ruta nos servirá para cerrar sesión.
     Route::get('logout', 'AuthController@logOut');
@@ -68,10 +70,12 @@ Route::group(array('before' => 'auth'), function()
     Route::get('passwordChange', 'PasswordController@passwordChange');
 	Route::post('passwordChange', 'PasswordController@change');
 });
+
 Route::get('acta', 'C39manifiestosController@acta');
 Route::post('acta', 'C39manifiestosController@actaPOST');
 Route::get('print/{acta}', 'C39manifiestosController@printer');
-Route::group(array('before' => 'guest'), function()
+
+/*Route::group(array('before' => 'guest'), function()
 {
 	//index
 	Route::get('/', function()
@@ -88,7 +92,22 @@ Route::group(array('before' => 'guest'), function()
 	//recuperar contaseña
 	Route::controller('password', 'RemindersController');
 	Route::get('password/reset/{token}', 'RemindersController@getReset');
-	Route::post('password/reset/{token}', array('uses' => 'RemindersController@postReset', 'as' => 'password.update'));
-});
+	Route::post('password/reset/{token}', array('uses' => 'RemindersController@postReset', 'as' => 'password.update')); 
+}); */
 
+//index
+	Route::get('/', function()
+	{
+		return View::make('index');
+	});
 
+	// Nos mostrará el formulario de login.
+	Route::get('login', 'AuthController@showLogin');
+
+	// Validamos los datos de inicio de sesión.
+	Route::post('login', 'AuthController@postLogin');
+
+	//recuperar contaseña
+	Route::controller('password', 'RemindersController');
+	Route::get('password/reset/{token}', 'RemindersController@getReset');
+	Route::post('password/reset/{token}', array('uses' => 'RemindersController@postReset', 'as' => 'password.update')); 

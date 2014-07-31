@@ -7,7 +7,7 @@
         <div class="panel-heading"> Encabezado manifiesto</div>
         <div class="panel-body">
 
-            <table class="table">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>Nº Programación</th>

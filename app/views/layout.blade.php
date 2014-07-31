@@ -12,10 +12,10 @@
                 @if(Auth::user() != null)
                     @if(Auth::user()->id_rol == '1')
                       <!--  <a class="navbar-brand" href="{{URL::to('indexAdmin')}}">Aduanas Admin</a> -->
-                     <a class="navbar-brand">Sistema Nacional de Aduanas - Cabotaje</a> 
+                     <a class="navbar-brand"  href="{{URL::to('indexAdmin')}}">Sistema Nacional de Aduanas - Cabotaje- Administrador</a> 
                     @elseif(Auth::user()->id_rol == '2')    
                        <!--   <a class="navbar-brand" href="{{URL::to('indexNav')}}">Aduanas Naviera</a>  --> 
-                       <a class="navbar-brand">Sistema Nacional de Aduanas - Cabotaje</a>                  
+                       <a class="navbar-brand">Sistema Nacional de Aduanas - Cabotaje - Naviera</a>                  
                     @endif
                 @else
                     <a class="navbar-brand" href="{{URL::to('index')}}">Aduanas</a>
